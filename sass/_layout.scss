@@ -1,0 +1,62 @@
+.container{
+    max-width: 120rem;
+    margin: 8rem auto;
+    background-color: var(--color-Grey-light-2);//wo iska ek variable bna rahe but apn nahi bnayenge ...
+    box-shadow:0 2rem 6rem rgba(0,0,0,.3) ;
+    min-height: 50rem;//for testing purposes 
+}
+
+.header{
+    font-size: 1.4rem;//font size kafi chhota tha usko bara kare k liye hmne ye likha hai ...
+      height: 7rem;
+      background-color: #fff;
+      border-bottom: 1px solid var(--color-Grey-light-2);
+
+      display: flex;//this center the logo flex box and user nav as flex box
+      justify-content: space-between;//this give the soace btewwn the flex items
+      align-items: center;//and this will center them along cross axis
+}
+.content{
+   display: flex;   
+}
+
+.sidebar{
+    background-color: var(--color-Grey-dark-1);
+
+    flex:0 0 18%;// grow =0 shrink=0 width =18%
+    //we are giving the space between the list and copyright text ... 
+    //we are changing the direction of the flex then we will use space between property 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hotel-view{
+    background-color: #fff;
+  //  background-color: yellow;
+   // height: 80rem;//jbn hmne description box bnaya to wo 80 rem se bada tha to hmne hieght prop hta di taki uska hieght content khud select kare ....
+    flex: 1;  
+}
+.detail{
+    font-size: 1.4rem;
+    display: flex;
+    padding: 4.5rem;
+    background-color: #fff;
+    border-bottom: 1px solid var(--color-Grey-light-2);//isko line vaRIABLE ...
+}
+.description{
+    //font-size: 1.4rem;
+   background-color:#fff;
+   box-shadow: 0 2rem 5rem rgba(0,0,0,.06);//shawdow light bnaya h isko
+   padding: 3rem ;
+   flex: 0 0 60%;
+   margin-right: 4.5rem;
+}
+.user-reviews{
+  // background-color: #bada55;
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+

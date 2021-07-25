@@ -1,0 +1,520 @@
+///////////////////////////////////////////////
+//logo
+
+.logo{
+    height:3.25rem;
+    margin-left: 2rem;//because want logo should have space of 30% in left only so we had witten this margin prop. in logo element itself ....
+
+}
+///////////////////////////////////////////////
+//search box
+
+.search{
+   // background-color: blue;
+    flex: 0 0 40%;//becuse we dont want it to grow or shrike we just want to it occpy the 40% of header size
+////////nested flex box//////
+    display: flex;//kya hua tha ki hm jb seach k buttons k saath kaam kar rahe the to uske ander to aagya tha but ab wothoda uppar tha to usko center karne k liye hm yahn flex box prop use kar rahe h ...
+    align-items: center;
+    justify-content: center;
+//////////////////////////////    
+    &__input{
+        font-family: inherit;//input element inherit nahi karta h default to hme ye likhna hoga//aur inherit karega header se ye apna font size ...
+        font-size: inherit;//same case as font family ...
+        color: inherit;//same as font family...
+        background-color: var(--color-Grey-light-2);//hm uska color grey kar rahe h yahn is line of code se 
+        border: none;//default border hta rahe hai ...
+        padding: .7rem 2rem;//top and bottom .7 rem and left and right 2 rem
+        border-radius: 100px;// for making the round edges
+        width: 90%;//focus karne pe search box bara karne wala effect dalna hai isliye isko 90% set karenge ... thik baa???
+        transform: all .2s;// aur focus waala kaam ojaye aaramse isliye hm all .2sec likh rahe hai ...
+        margin-right: -2.75rem;//ye hmne margin rakha tha isliye ho raha h ...
+
+        &:focus{//ab yahn focus hone pe kya hoga wo likh rahe hai ....
+            outline: none;//saare outlines ko 0 kar rahe hai jb wo focus me aaye tb
+            width: 100%;//width hojaye 100% ..uske liye ye code ab click karne se bada hoga ???
+            background-color: var(--color-Grey-light-1);//aur thoda dark bhi hojaye uske liye...
+        }
+        //we are changing the place holder text color 
+        &::-webkit-input-placeholder{
+            font-weight: 100;
+            color: var(--color-Grey-light-4);
+        }
+
+    }
+    //we changing the bg--color of icon ...
+    &__input:focus * &__buttons{
+        background-color: var(--color-Grey-light-1);
+    }
+    &__buttons{
+       //border:none;
+       border: none;//we dont want any border on it ...so ...
+       background-color: var(--color-Grey-light-2);//aur button ka bhi hm same background color chate hai isliye
+
+       &:focus{
+           outline: none;//jb focus ho to koi outline na ho uske liye hm ye likh rahe hai ...
+       }
+       &:active{
+           transform: translateY(2px);//isko hm seach k in[ut k andar laa rahe h
+    }
+    }
+    &__icon{
+        height: 2rem;
+        width: 2rem;
+        //we changing the color of svg search icon here ...
+        fill:var(--color-Grey-dark-3);
+    }
+}
+
+///////////////////////////////////////////////
+//user navigation
+.user-nav{
+   // background-color: chartreuse;
+    ///once again we are useing  NESTED flex to display it in a row ...
+    align-self: stretch;//bgcolor pure ko fill kare isliye hmne isko use kiya tha ..//actually header me jb hmne align center likh tha to sab center hogye the aur aisa hm nav k saath nahi chahte isliye hm ye likh rahe h ..
+    display: flex;
+    align-items: center;
+    //we selecting the all the direct childern of user nav
+    & > *{
+        padding : 0 2rem;//0 on the top and 2rem on left annd right ...
+        cursor: pointer;//we want cursor as pointer ...
+        height: 100%;//ab hover pure pure me hoga//but kya hua h ki jo hmare icoms the wo top k tarf shift hogye h to use k liye hm kuch changes karenge
+       // /is code se hm uppar tarf shift hue icon ko niche layenge ...
+        display: flex;
+        align-items: center;
+    }
+    & > *:hover {
+        background-color: var(--color-Grey-light-2) ;
+    }
+    &__icon-box{
+         position: relative;
+    }
+    &__icon{
+        height: 2.25rem;
+        width: 2.25rem;
+        fill: var(--color-Grey-dark-2) ;
+    }
+    &__notification{
+        font-size:  .8rem; 
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 100px;//for getting a perfect circle we used a very high number
+        background-color: var(--color-primary);
+        color: #fff;
+        position: absolute;
+        top:1.5rem;
+        right: 1.1rem;
+        //by using flex nesting we are cebtring the text of the element ...
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+  /*  &__user{
+     hme ise format karne ki koi jarurat nahi h hme ye kar diya h saare child select kar k starting me hi
+    }*/
+    &__user-photo{
+        height: 3.75rem;
+        border-radius: 50%;
+        margin-right: 1rem;//hme thoda space chahiye tha isliye
+    }
+   /* &__user-name{
+same as user ... we are not styling this ...
+    }*/
+}
+////////////////////////////////////////////////////////////////////////////
+//side navigation
+.side-nav{
+    font-size: 1.4rem;
+    list-style: none;
+    margin-top: 1.5rem;
+
+    &__item{
+        position: relative;
+        &:not(:last-child){
+            margin-bottom: .5rem;
+        }
+    }
+    //now for making the hover effect we need to make a pseudo element 
+    &__item::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 3px;
+        background-color: var(--color-primary);
+        transform: scaleY(0);
+        transition: transform .2s,
+                    width .4s cubic-bezier(1,0,0,1) .2s,//width kitni der me aayeha phir kitna delay hoga ye likha h hmne 
+                    background-color.1s;
+    }
+    &__item:hover::before,
+    &__item--active::before{
+        transform: scaleY(1);
+        width: 100%;
+    }
+    //now we changing the color when thw user clicks the items ...
+    &__item:active::before{
+        background-color: var(--color-primary-light);
+    }
+    &__link:link,
+    &__link:visited{
+        color: var(--color-Grey-light-1);
+        text-decoration: none;
+        text-transform: uppercase;
+        display: block;
+        padding: 1.5rem 3rem;
+        position: relative;
+        z-index:10 ;
+
+        //now alining the element vertically ...
+        display: flex;
+        align-items: center;
+
+    }
+    &__icon{
+        width:1.75rem;
+        height: 1.75rem;
+        margin-right: 2rem;
+        fill: currentColor;//currentcolor is just the color of parent element ....
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////@
+//legal text 
+.legal{
+    font-size: 1.2rem;
+    color: var(--color-Grey-light-4);
+    text-align: center;
+    padding: 2.5rem;
+}
+
+
+///////////////////////////////////////////////////////////////////////////gallery
+.gallery{
+    display: flex;
+    &__photo{
+        width: 100%;
+        
+        display: block;
+    }
+}
+///////////////////////////////////////////////////////////////////////////hotel over view 
+.overview{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--color-Grey-light-2);
+  //  justify-content:space-between ;
+    &__heading{
+        font-size: 2.25rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 1.5rem 3rem;
+    }
+    &__stars{
+      // flex:1; we are not using this because stars is occuping the whole space and when we add effects in it then it will be shown over all space......so we are margin auto
+      margin-right:auto;
+     // background-color: yellow;
+    }
+    &__icon-star,
+    &__icon-location{
+        width: 1.75rem;
+        height: 1.75rem;
+        fill:var(--color-primary);
+    }
+    &__location{
+       // flex: 1;
+       font-size: 1.2rem;
+       display: flex;
+       align-items: center;
+    }
+    &__icon-location{
+        margin-right: .5rem;
+    }   
+    &__rating{
+        background-color: var(--color-primary);
+        color:#fff;
+        margin-left:3rem;
+        padding: 0 2.25rem;
+        align-self: stretch;
+
+        display: flex;
+        flex-direction: column ;
+        align-items: center;
+        justify-content: center;
+
+    }
+    &__rating-average{
+         font-size:2.25rem;
+         font-weight: 300;
+         margin-bottom: -3px;
+    }
+    &__rating-count{
+        font-size: .8rem;
+        text-transform: uppercase;
+    }
+}
+//////////////////////////////////////////////////////////////////////////btn inline
+.btn-inline{
+    border: none;
+    color: var(--color-primary);
+    font-size: inherit;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    display: inline-block;
+    background-color: transparent;
+    cursor:pointer;
+    transition: all .2s;
+    & span{
+        margin-left: 3px;
+        transition: margin-left .2s;
+    }
+
+    &:hover{
+        color: var(--color-Grey-dark-1);
+        span{
+            margin-left: 8px;
+        }
+    }
+    &:focus{
+        outline: none;
+        animation: pulsate 1s infinite;
+    }
+}
+@keyframes pulsate{
+    0%{
+        transform:scale(1);
+        box-shadow: none;
+    }
+    50%{
+        transform:scale(1.05);
+        box-shadow: 0 1rem 4rem rgba(0,0,0,.25);
+
+    }
+    100%{
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+//////////////////////////////////////////////////////////////////////////paragraph & list
+.paragraph:not(:last-of-type){
+    margin-bottom: 2rem;
+}
+.list{
+    list-style: none;
+    margin: 3rem 0;
+    padding: 3rem 0;
+    border-top: 1px solid var(--color-Grey-light-2);
+    border-bottom: 1px solid var(--color-Grey-light-2);
+    display: flex;
+    flex-wrap: wrap;
+
+    &__items{
+        flex: 0 0 50%;
+        margin-bottom: .7rem;
+    }
+    &__items::before{
+        content: "";
+        display: inline-block;
+        height:1rem ;
+        width: 1rem;
+        margin-right:.7rem ;
+        //old browsers ... work nahi kar raha tha 
+        //background-image: url(../../starter/img/chevron-thin-right.svg);
+        //background-size: cover;
+        //new browsers 
+        background-color: var(--color-primary);
+        -webkit-mask-image: url(../img/chevron-thin-right.svg);
+        -webkit-mask-size: cover;
+        mask-size: cover;//for future when all other browser starts implimenting this ...
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////recommend
+.recommend{
+    font-size: 1.3rem;
+    color:var(--color-Grey-dark-3);
+
+    display: flex;
+    align-items: center;
+
+    &__counts{
+        margin-right: auto;// for giving the margin between text and images and to push the element to the right end 
+    }
+    &__friends{
+
+    }
+
+    &__photo{
+        box-sizing: content-box;// border k karn size chhota na ho isliye use kiya h...
+        height: 4rem;//size chhota karne k liye img ka
+        width: 4rem;
+        border-radius: 50%;// usko circle bnane k liye 
+        border: 3px solid#fff;
+        &:not(:last-child){
+            margin-right: -1.5rem;
+        }
+    }
+}
+//////////////////////////////////////////////////////////////////////////reviews
+.review{
+    background-color: #fff;
+    box-shadow:0 2rem 5rem rgba(0,0,0,.06) ;
+    padding: 3rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+    overflow: hidden;
+    &__text{
+        margin-bottom: 2rem;
+        z-index: 10;//z index only works when we set a postion...
+        position: relative;
+    }
+    &__user{
+        display: flex;
+        align-items: center;
+    }
+    &__photo{
+       height: 4.5rem;
+       width: 4.5rem;
+       border-radius:50% ;
+       margin-right: 1.5rem;
+    }
+    &__user-box{
+        //display: flex;
+      //align-items: center;
+       margin-right: auto;;
+    }
+    &__user-name{
+       font-size: 1.1rem;
+       font-weight: 600;
+       text-transform: uppercase;
+       margin-bottom: .4rem;
+    }
+    &__user-date{
+       font-size:1rem;
+       color:var(--color-Grey-dark-2);
+    }
+    &__user-rating{
+       color: var(--color-primary);
+       font-size: 2.2rem;
+       font-weight: 300;
+    }
+    &::before{
+        content: "\201C";
+        position: absolute;
+        top: -2.75rem;
+        left:-1rem;
+        line-height: 1;
+        font-size: 20rem;
+        color: var(--color-Grey-light-2);
+        font-family: sans-serif;
+        z-index: 1;
+    }
+}
+//////////////////////////////////////////////////////////////////////////////cta=cAll to action
+.cta{
+    
+    padding: 3.5rem 0;
+    text-align: center;
+
+    &__book-now{
+        font-size: 2rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 2.5rem;
+    }
+}
+//////////////////////////////////////////////////////////////////////////////button
+.btn{
+    font-size:1.5rem ;
+    font-weight: 300;
+    text-transform: uppercase;
+    border-radius: 100px;
+    border: none;
+    background-image: linear-gradient(to right, var(--color-primary-light),var(--color-primary-dark));
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    &>*{
+        display: inline-block;
+        height: 100%;
+         width: 100%; 
+         transition: all .2s;
+    }
+    &__visible{
+       
+       padding: 2rem 7.5rem;//padding will define the size of the button 
+    }
+    &__invisible{
+        
+        position: absolute;
+        padding: 2rem 0;
+        
+        left: 0;
+        top: -100%;
+        
+
+    }
+    &:hover{
+        background-image: linear-gradient(to left, var(--color-primary-light),var(--color-primary-dark));
+    }
+    &:hover &__visible{
+        transform: translateY(100%);
+    }
+    &:hover &__invisible{
+        top: 0;
+    }
+    &:focus{
+        outline: none;
+        animation: pulsate 1s infinite;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
